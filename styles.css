@@ -1,0 +1,173 @@
+/*
+ * Hoja de estilos para la maqueta de "Consulta de comprobantes".
+ * Se busca emular el aspecto de una aplicación de escritorio clásica de Windows,
+ * utilizando colores neutros, bordes pronunciados y una tipografía legible.
+ */
+
+/* Ajustes globales */
+body {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  background-color: #ececec;
+  color: #000;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Ventana principal */
+.window {
+  width: 900px;
+  margin: 0 auto;
+  background-color: #e5e5e5;
+  border: 1px solid #9b9b9b;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Encabezado de la ventana */
+.window-header {
+  background-color: #d0d0d0;
+  border-bottom: 1px solid #a0a0a0;
+  padding: 8px 12px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.window-header .title {
+  font-size: 16px;
+}
+
+/* Contenedor de la tabla (con scroll vertical) */
+.table-container {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 400px;
+}
+
+/* Estilos de la tabla */
+.comprobantes-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.comprobantes-table thead th {
+  background-color: #d6d6d6;
+  border: 1px solid #b0b0b0;
+  padding: 4px 8px;
+  text-align: left;
+  font-weight: bold;
+  white-space: nowrap;
+  height: 26px;
+}
+
+.comprobantes-table thead th.sel-col {
+  width: 40px;
+  text-align: center;
+}
+
+.comprobantes-table tbody td {
+  border: 1px solid #c0c0c0;
+  padding: 4px 8px;
+  white-space: nowrap;
+  height: 24px;
+  background-color: #ffffff;
+}
+
+/* Filas pares con un color de fondo ligeramente distinto para mejorar la legibilidad */
+.comprobantes-table tbody tr:nth-child(even) td {
+  background-color: #f7f7f7;
+}
+
+/* Resaltado al pasar el ratón */
+.comprobantes-table tbody tr:hover td {
+  background-color: #cde3fd;
+}
+
+/* Resaltado de la fila seleccionada */
+.comprobantes-table tbody tr.selected td {
+  background-color: #9dc9f5;
+}
+
+/* Ajustes para la primera columna (checkbox) */
+.comprobantes-table tbody td.sel-col {
+  text-align: center;
+  width: 40px;
+}
+
+.comprobantes-table input[type="checkbox"] {
+  margin: 0;
+}
+
+/* Barra inferior con botones ficticios */
+.bottom-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background-color: #d0d0d0;
+  border-top: 1px solid #a0a0a0;
+}
+
+.bottom-bar button {
+  padding: 4px 10px;
+  font-size: 12px;
+  color: #000;
+  background: linear-gradient(#f9f9f9, #e5e5e5);
+  border: 1px solid #a6a6a6;
+  border-radius: 3px;
+  cursor: default;
+}
+
+.bottom-bar button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.bottom-bar .copies-input {
+  width: 40px;
+  text-align: center;
+  font-size: 12px;
+  padding: 4px;
+  border: 1px solid #a6a6a6;
+  border-radius: 3px;
+  background-color: #ffffff;
+}
+
+/* Menú contextual */
+.context-menu {
+  position: absolute;
+  z-index: 9999;
+  background-color: #ffffff;
+  border: 1px solid #9e9e9e;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+  padding: 8px;
+  min-width: 220px;
+  display: none;
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.context-menu .context-section {
+  margin-bottom: 8px;
+}
+
+.context-menu .context-header {
+  font-weight: bold;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #d0d0d0;
+  padding-bottom: 2px;
+}
+
+.context-menu .context-item {
+  display: flex;
+  flex-direction: row;
+  margin-left: 8px;
+  margin-bottom: 3px;
+}
+
+.context-menu .label {
+  font-weight: bold;
+  width: 80px;
+}

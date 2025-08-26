@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Consulta de comprobantes</title>
+  <!-- Enlace a la hoja de estilos -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Contenedor principal que emula la ventana de la aplicación de escritorio -->
+  <div class="window">
+    <div class="window-header">
+      <!-- Título de la ventana -->
+      <span class="title">Consulta de comprobantes</span>
+    </div>
+    <!-- Contenedor de la tabla de datos -->
+    <div id="table-container" class="table-container">
+      <table id="comprobantes-table" class="comprobantes-table">
+        <thead>
+          <tr>
+            <th class="sel-col">Sel</th>
+            <th>Suc</th>
+            <th>Cm</th>
+            <th>Comprobante</th>
+            <th>Referencia</th>
+            <th>Número</th>
+            <th>Fecha</th>
+            <th>Importe</th>
+            <th>Cliente</th>
+            <th>Nombre</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Las filas se insertan dinámicamente desde main.js -->
+        </tbody>
+      </table>
+    </div>
+    <!-- Barra inferior con botones ficticios para imitar la interfaz original -->
+    <div class="bottom-bar">
+      <button disabled>Ninguno</button>
+      <button disabled>Imprimir comprobantes</button>
+      <button disabled>Envío Mail</button>
+      <button disabled>Imprimir agrupado PDF</button>
+      <button disabled>Asignar Copias a Imprimir</button>
+      <input type="text" value="1" class="copies-input" disabled />
+      <button disabled>Avanzado</button>
+    </div>
+  </div>
+  <!-- Menú contextual invisible por defecto; se muestra al hacer clic derecho sobre una fila -->
+  <div id="context-menu" class="context-menu"></div>
+  <!-- Script principal con la lógica de interacción -->
+  <script src="main.js"></script>
+</body>
+</html>
