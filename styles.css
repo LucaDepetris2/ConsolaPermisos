@@ -1,8 +1,31 @@
 /*
  * Hoja de estilos para la maqueta de "Consulta de comprobantes".
- * Se busca emular el aspecto de una aplicación de escritorio clásica de Windows,
- * utilizando colores neutros, bordes pronunciados y una tipografía legible.
+ * Emula una app de escritorio y ahora escala bien en 1366x768 y 1920x1080.
  */
+
+/* ===== Tokens responsivos ===== */
+:root{
+  /* Ancho de la “ventana”: entre 920px y 1400px según viewport */
+  --win-w: clamp(920px, 86vw, 1400px);
+
+  /* Tipografías/base */
+  --fs-base: clamp(13px, 1vw, 15px);
+  --fs-small: clamp(12px, .9vw, 14px);
+
+  /* Alturas de fila/cabecera */
+  --row-h: clamp(24px, 2.2vh, 28px);
+  --head-h: clamp(26px, 2.4vh, 30px);
+
+  /* Altura de la tabla: usa viewport – “cromo” de cabecera/botones */
+  --table-h: min(66vh, calc(100vh - 280px));
+}
+
+@media (max-width: 1439.98px){
+  /* Perfil 1366 x 768 aprox. */
+  :root{
+    --table-h: min(56vh, calc(100vh - 300px));
+  }
+}
 
 /* Ajustes globales */
 body {
@@ -11,11 +34,12 @@ body {
   color: #000;
   margin: 0;
   padding: 20px;
+  font-size: var(--fs-base);
 }
 
 /* Ventana principal */
 .window {
-  width: 900px;
+  width: var(--win-w);
   margin: 0 auto;
   background-color: #e5e5e5;
   border: 1px solid #9b9b9b;
@@ -35,21 +59,22 @@ body {
 }
 
 .window-header .title {
-  font-size: 16px;
+  font-size: clamp(15px, 1.1vw, 17px);
 }
 
 /* Contenedor de la tabla (con scroll vertical) */
 .table-container {
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 400px;
+  max-height: var(--table-h);
 }
 
 /* Estilos de la tabla */
 .comprobantes-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
+  font-size: var(--fs-base);
+  table-layout: fixed; /* columnas más consistentes al crecer */
 }
 
 .comprobantes-table thead th {
@@ -59,11 +84,11 @@ body {
   text-align: left;
   font-weight: bold;
   white-space: nowrap;
-  height: 26px;
+  height: var(--head-h);
 }
 
 .comprobantes-table thead th.sel-col {
-  width: 40px;
+  width: 48px;
   text-align: center;
 }
 
@@ -71,8 +96,10 @@ body {
   border: 1px solid #c0c0c0;
   padding: 4px 8px;
   white-space: nowrap;
-  height: 24px;
+  height: var(--row-h);
   background-color: #ffffff;
+  overflow: hidden;
+  text-overflow: ellipsis; /* evita que el texto empuje el layout */
 }
 
 /* Filas pares con un color de fondo ligeramente distinto para mejorar la legibilidad */
@@ -93,7 +120,7 @@ body {
 /* Ajustes para la primera columna (checkbox) */
 .comprobantes-table tbody td.sel-col {
   text-align: center;
-  width: 40px;
+  width: 48px;
 }
 
 .comprobantes-table input[type="checkbox"] {
@@ -108,11 +135,12 @@ body {
   padding: 8px 12px;
   background-color: #d0d0d0;
   border-top: 1px solid #a0a0a0;
+  flex-wrap: wrap; /* evita overflow en pantallas más chicas */
 }
 
 .bottom-bar button {
   padding: 4px 10px;
-  font-size: 12px;
+  font-size: var(--fs-small);
   color: #000;
   background: linear-gradient(#f9f9f9, #e5e5e5);
   border: 1px solid #a6a6a6;
@@ -126,9 +154,9 @@ body {
 }
 
 .bottom-bar .copies-input {
-  width: 40px;
+  width: 48px;
   text-align: center;
-  font-size: 12px;
+  font-size: var(--fs-small);
   padding: 4px;
   border: 1px solid #a6a6a6;
   border-radius: 3px;
@@ -143,10 +171,10 @@ body {
   border: 1px solid #9e9e9e;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
   padding: 8px;
-  min-width: 220px;
+  min-width: 240px;
   display: none;
-  font-size: 13px;
-  line-height: 1.3;
+  font-size: var(--fs-small);
+  line-height: 1.35;
 }
 
 .context-menu .context-section {
@@ -169,5 +197,19 @@ body {
 
 .context-menu .label {
   font-weight: bold;
-  width: 80px;
+  width: 88px;
+}
+
+/* ===== Extras para muy ancho (>= 1920) ===== */
+@media (min-width: 1600px){
+  .comprobantes-table thead th.sel-col,
+  .comprobantes-table tbody td.sel-col { width: 56px; }
+}
+
+/* ===== Safety: si el alto es muy chico, hacemos la tabla más compacta ===== */
+@media (max-height: 740px){
+  :root{
+    --row-h: 24px;
+    --head-h: 26px;
+  }
 }
